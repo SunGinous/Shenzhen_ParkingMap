@@ -833,26 +833,8 @@ var app = {};
 option = null;
 app.title = '深圳停车场/交通流 - 线特效';
 
-$.ajax({
-    url:'data/carline.json', 
-    type:'GET',
-    dataType:'json',
-    success:function(data) {
-	    var SZline = [];
-        for(var i=0;i<data.length;i++){
-	        SZline.push({
-		        coords: data[i],
-		        lineStyle: {
-                    normal: {
-                        //color: echarts.color.modifyHSL('#5A94DF', Math.round(i*0.3))
-						color: 'gold'
-                    }
-                }
-	        });
-        };
-
-	console.log(data_parking.slice(10,20));
-    myChart.setOption(option = {
+/*首先加载地图底板*/
+    option = {
     bmap: {
         center: [114.135751 , 22.562661],
         zoom: 15,
@@ -1023,21 +1005,14 @@ $.ajax({
 			]
         }
     },
-	title: {
-	    text: '深圳市罗湖区停车场信息',
-		x: 'left',
-		textStyle: {
-            color: '#fff',
-			fontSize: 25
-        }
-	},
+
 	tooltip : {
         trigger: 'item'
     },
 	legend: {
         left: 'right',
 		y: 'bottom',
-        data: ['第一类停车场', '第二类停车场', '第三类停车场', '第四类停车场', '第五类停车场', '第六类停车场'],
+        data: ['停车场类型：','第一类停车场', '第二类停车场', '第三类停车场', '第四类停车场', '第五类停车场', '第六类停车场'],
         textStyle: {
             color: '#ccc'
         }
@@ -1056,6 +1031,68 @@ $.ajax({
     },
 	*/
     series: [
+	        {
+	        name: '停车场类型：',
+            type: 'scatter',
+            coordinateSystem: 'bmap',
+		    data: convertData(data_parking.slice(0,304), 100),
+            symbolSize: function (val) {
+                return val[2] / 10;
+            },
+		    rippleEffect: {
+                period: 3,
+                brushType: 'stroke',
+                scale: 3
+            },
+            hoverAnimation: true,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'white',
+                    show: false
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#d95850',
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            zlevel: 1	
+		
+        },
+		{
+	        name: '停车场类型：',
+            type: 'effectScatter',
+            coordinateSystem: 'bmap',
+		    data: convertData(data_parking.slice(304,402), 100),
+            symbolSize: function (val) {
+                return val[2] / 10;
+            },
+		    rippleEffect: {
+                period: 3,
+                brushType: 'stroke',
+                scale: 3
+            },
+            hoverAnimation: true,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'white',
+                    show: false
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#d95850',
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            zlevel: 1	
+		
+        },
         {
 	        name: '第一类停车场',
             type: 'scatter',
@@ -1427,7 +1464,51 @@ $.ajax({
             },
             zlevel: 1	
 		
-        },
+        }]
+    };
+	myChart.setOption(option);
+
+/*循环加载停车流图数据*/
+var url = ['data/2017年11月1日.json', 'data/2017年11月2日.json', 'data/2017年11月3日.json', 'data/2017年11月4日.json', 'data/2017年11月5日.json', 'data/2017年11月6日.json', 'data/2017年11月7日.json', 'data/2017年11月8日.json', 'data/2017年11月9日.json', 'data/2017年11月10日.json', 'data/2017年11月11日.json', 'data/2017年11月12日.json', 'data/2017年11月13日.json', 'data/2017年11月14日.json', 'data/2017年11月15日.json', 'data/2017年11月16日.json', 'data/2017年11月17日.json', 'data/2017年11月18日.json', 'data/2017年11月19日.json', 'data/2017年11月20日.json', 'data/2017年11月21日.json', 'data/2017年11月22日.json', 'data/2017年11月23日.json', 'data/2017年11月24日.json', 'data/2017年11月25日.json', 'data/2017年11月26日.json', 'data/2017年11月27日.json', 'data/2017年11月28日.json', 'data/2017年11月29日.json', 'data/2017年11月30日.json', 'data/2017年12月1日.json', 'data/2017年12月2日.json', 'data/2017年12月3日.json', 'data/2017年12月4日.json', 'data/2017年12月5日.json', 'data/2017年12月6日.json', 'data/2017年12月7日.json', 'data/2017年12月8日.json', 'data/2017年12月9日.json', 'data/2017年12月10日.json', 'data/2017年12月11日.json', 'data/2017年12月12日.json', 'data/2017年12月13日.json', 'data/2017年12月14日.json', 'data/2017年12月15日.json', 'data/2017年12月16日.json', 'data/2017年12月17日.json', 'data/2017年12月18日.json', 'data/2017年12月19日.json', 'data/2017年12月20日.json', 'data/2017年12月21日.json', 'data/2017年12月22日.json', 'data/2017年12月23日.json', 'data/2017年12月24日.json', 'data/2017年12月25日.json', 'data/2017年12月26日.json', 'data/2017年12月27日.json', 'data/2017年12月28日.json', 'data/2017年12月29日.json', 'data/2017年12月30日.json', 'data/2017年12月31日.json', 'data/2018年1月1日.json', 'data/2018年1月2日.json', 'data/2018年1月3日.json', 'data/2018年1月4日.json', 'data/2018年1月5日.json', 'data/2018年1月6日.json', 'data/2018年1月7日.json', 'data/2018年1月8日.json', 'data/2018年1月9日.json', 'data/2018年1月10日.json', 'data/2018年1月11日.json', 'data/2018年1月12日.json', 'data/2018年1月13日.json', 'data/2018年1月14日.json', 'data/2018年1月15日.json', 'data/2018年1月16日.json', 'data/2018年1月17日.json', 'data/2018年1月18日.json', 'data/2018年1月19日.json', 'data/2018年1月20日.json', 'data/2018年1月21日.json', 'data/2018年1月22日.json', 'data/2018年1月23日.json', 'data/2018年1月24日.json', 'data/2018年1月25日.json', 'data/2018年1月26日.json', 'data/2018年1月27日.json', 'data/2018年1月28日.json', 'data/2018年1月29日.json', 'data/2018年1月30日.json', 'data/2018年1月31日.json', 'data/2018年2月1日.json', 'data/2018年2月2日.json', 'data/2018年2月3日.json', 'data/2018年2月4日.json', 'data/2018年2月5日.json', 'data/2018年2月6日.json', 'data/2018年2月7日.json', 'data/2018年2月8日.json', 'data/2018年2月9日.json'];
+var date = ['2017年11月1日', '2017年11月2日', '2017年11月3日', '2017年11月4日', '2017年11月5日', '2017年11月6日', '2017年11月7日', '2017年11月8日', '2017年11月9日', '2017年11月10日', '2017年11月11日', '2017年11月12日', '2017年11月13日', '2017年11月14日', '2017年11月15日', '2017年11月16日', '2017年11月17日', '2017年11月18日', '2017年11月19日', '2017年11月20日', '2017年11月21日', '2017年11月22日', '2017年11月23日', '2017年11月24日', '2017年11月25日', '2017年11月26日', '2017年11月27日', '2017年11月28日', '2017年11月29日', '2017年11月30日', '2017年12月1日', '2017年12月2日', '2017年12月3日', '2017年12月4日', '2017年12月5日', '2017年12月6日', '2017年12月7日', '2017年12月8日', '2017年12月9日', '2017年12月10日', '2017年12月11日', '2017年12月12日', '2017年12月13日', '2017年12月14日', '2017年12月15日', '2017年12月16日', '2017年12月17日', '2017年12月18日', '2017年12月19日', '2017年12月20日', '2017年12月21日', '2017年12月22日', '2017年12月23日', '2017年12月24日', '2017年12月25日', '2017年12月26日', '2017年12月27日', '2017年12月28日', '2017年12月29日', '2017年12月30日', '2017年12月31日', '2018年1月1日', '2018年1月2日', '2018年1月3日', '2018年1月4日', '2018年1月5日', '2018年1月6日', '2018年1月7日', '2018年1月8日', '2018年1月9日', '2018年1月10日', '2018年1月11日', '2018年1月12日', '2018年1月13日', '2018年1月14日', '2018年1月15日', '2018年1月16日', '2018年1月17日', '2018年1月18日', '2018年1月19日', '2018年1月20日', '2018年1月21日', '2018年1月22日', '2018年1月23日', '2018年1月24日', '2018年1月25日', '2018年1月26日', '2018年1月27日', '2018年1月28日', '2018年1月29日', '2018年1月30日', '2018年1月31日', '2018年2月1日', '2018年2月2日', '2018年2月3日', '2018年2月4日', '2018年2月5日', '2018年2月6日', '2018年2月7日', '2018年2月8日', '2018年2月9日'];
+void function loop(i){
+	if(i<url.length){
+		temp = date[i];
+        $.ajax({
+            url:url[i],
+            type:'GET',
+            dataType:'json',
+            success:function(data) {
+	            var SZline = [];
+                for(var i=0;i<data.length;i++){
+	                SZline.push({
+		                coords: data[i],
+		                lineStyle: {
+                            normal: {
+                                //color: echarts.color.modifyHSL('#5A94DF', Math.round(i*0.3))
+						        color: 'gold'
+                            }
+                        }
+	                });
+                };
+
+
+    
+	option = {
+		title: {
+	    text: '深圳市停车场信息及停车诱导流图',
+		subtext: temp,
+		subtextStyle:{
+			color:'#fff',
+			fontSize:35,
+		},
+		x: 'left',
+		textStyle: {
+            color: '#fff',
+			fontSize: 35
+        }
+	},
+    series: [      
 		{
             type: 'lines',
             coordinateSystem: 'bmap',
@@ -1463,8 +1544,16 @@ $.ajax({
             },
             zlevel: 1
         }]
-    });
-}});;
+    };
+	myChart.setOption(option);
+	console.log(temp);
+	console.log(i);
+}});
+setTimeout(function() {loop(++i);}, 10000);
+}else{
+	loop(0);
+}}(0);;;
+
 if (option && typeof option === "object") {
     myChart.setOption(option, true);
 }
