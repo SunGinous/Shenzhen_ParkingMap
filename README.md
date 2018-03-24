@@ -9,3 +9,8 @@
 ## 打开方式
 - 由于jQuery加载的是本地JSON数据，部分浏览器无法正常显示HTML的内容，目前已知使用FireFox可直接打开
 - 使用chrome打开HTML时，需从cmd进入chrome安装目录，然后输入“chrome.exe --allow-file-access-from-files”启动chrome，再将HTML拖拽进chrome
+
+## 3/24更新
+- 引入新的数据集test_park_search.xlsx，real_parking_data.py对数据进行处理，生成101个json数据在data文件夹中
+- 在shenzhen_line_map_effect.js中以10s为时间步长循环异步加载data中的101个json数据，同时在页面上显示json数据对应的日期
+- 在shenzhen_line_map_effect.js中首先加载地图底板，然后在其上渲染停车流图，这样在循环加载json数据的时候，保证地图不会被重复加载，提升视觉体验
