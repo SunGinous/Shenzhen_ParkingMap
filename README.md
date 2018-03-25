@@ -14,3 +14,6 @@
 - 引入新的数据集test_park_search.xlsx，real_parking_data.py对数据进行处理，生成101个json数据在data文件夹中
 - 在shenzhen_line_map_effect.js中以10s为时间步长循环异步加载data中的101个json数据，同时在页面上显示json数据对应的日期
 - 在shenzhen_line_map_effect.js中首先加载地图底板，然后在其上渲染停车流图，这样在循环加载json数据的时候，保证地图不会被重复加载，提升视觉体验
+
+## 3/25更新
+- 之前为了使得地图底板和停车流图分别加载互不影响，在代码中添加了两个option，每个option中各有一个series，分别为停车场经纬度数据和停车流图数据，但是这样做会带来一个bug，就是第一个series中的第一各数据无法加载出来。解决方法是整个代码中只能有一个series（但可以有多个option），即将停车场经纬度数据和停车流数据放入同一个series里，由jQuery异步加载。
