@@ -11,6 +11,7 @@ import re
 from multiprocessing import Pool
 import pyquery as pq
 import random
+import json
 
 ''' 停车场经纬度，该部分数据可以从百度地图爬取 '''
 lng_lat = [[ 114.1308 , 22.592997 ],
@@ -539,12 +540,9 @@ def main():
         line = parse_one_page(html)
         result.append(line)
         #print(line,',')
-    string = ''
-    for i in result:
-        string+='\n'+str(i)+','
-    with open("data.txt","w") as f:
-        f.write(string)
-        #print(line,',')
+
+    with open("line.json","w") as f:
+        f.write(json.dumps(result))
 
 
 if __name__=='__main__':

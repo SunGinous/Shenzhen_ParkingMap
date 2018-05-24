@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html style="height: 100%">
-   <head>
-       <meta charset="utf-8">
-   </head>
-   <body style="height: 100%; margin: 0">
-       <div id="container" style="height: 100%"></div>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-	   <script type="text/javascript" src = "http://api.map.baidu.com/api?v=2.0&ak=53oVIOgmSIejwV7EfphPgTynOZbIiVYu"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-	   <script type="text/javascript"src = "jquery-3.2.1.min.js"></script>
-       <script type="text/javascript" src="shenzhen_line_map_effect.js"></script>
-   </body>
+    <head>
+        <meta charset="utf-8">
+	    <style>
+		    #table1{
+			    background-color: #FFFFFF
+			}
+			#table2{
+			    background-color: #464646
+			}
+			#table3{
+			    background-color: #FFFFFF
+			}
+		</style>
+    </head>
+    <body style="height: 100%; margin: 0">
+        <div id="container" style="height: 100%; width: 70%; float: left"></div>
+	    <div id="table1" style="height: 50%; width: 30%; float: right"></div>
+		<div id="table2" style="height: 50%; width: 30%; float: right"></div>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+	    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=53oVIOgmSIejwV7EfphPgTynOZbIiVYu"></script>
+        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+	    <script type="text/javascript" src="javascript/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="javascript/shenzhen_line_map_effect.js" async="async"></script>
+		<script type="text/javascript" src="javascript/shenzhen_line_map_table1.js" async="async"></script>
+		<script type="text/javascript" src="javascript/shenzhen_line_map_table2.js" async="async"></script>
+	    <script type="text/javascript" src="javascript/theme_dark.js"></script>
+    </body>
 </html>

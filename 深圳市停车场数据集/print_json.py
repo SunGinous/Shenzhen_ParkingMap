@@ -40,5 +40,5 @@ for i in range(len(df)):
 
 print(h,len(lng_lat))
 print(lng_lat)
-with open('../Shenzhen_ParkingMap_V3/data/lng_lat.json', 'w') as f:
+with open('../Shenzhen_ParkingMap_V3/data/parkinglots/lng_lat.json', 'w') as f:
     f.write(json.dumps(lng_lat))
